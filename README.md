@@ -1,3 +1,5 @@
+<div align="center">
+
 # [FluffBot - Your ASCII Virtual Pet](https://thatsinewave.github.io/FluffBot)
 
 ![Banner](https://raw.githubusercontent.com/ThatSINEWAVE/FluffBot/refs/heads/main/.github/SCREENSHOTS/FluffBot.png)
@@ -5,6 +7,8 @@
 Meet **FluffBot**, a charming ASCII-art virtual pet that lives in your browser! Care for your digital companion by feeding, playing, and cleaning while enjoying retro-style animations and interactive behaviors.
 
 **[Live Demo Here](https://thatsinewave.github.io/FluffBot)**
+
+</div>
 
 ## Features  
 
