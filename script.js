@@ -32,7 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
         DIRTY: 'DIRTY',
         CLEANING: 'CLEANING',
         PLAYFUL: 'PLAYFUL',
-        RELAXED: 'RELAXED'
+        RELAXED: 'RELAXED',
+        FOLLOWING_MOUSE: 'FOLLOWING_MOUSE',
+        PLAYING_WITH_MOUSE: 'PLAYING_WITH_MOUSE',
+        SURPRISED: 'SURPRISED'
     };
 
     // Default pet data
@@ -45,12 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
         state: STATES.IDLE,
         age: 0,
         lastSaved: Date.now(),
-        position: { x: 0, y: 0 },
+        position: {
+            x: 0,
+            y: 0
+        },
         currentFrame: 0
     };
 
     // Current pet data
-    let pet = loadPet() || { ...DEFAULT_PET };
+    let pet = loadPet() || {
+        ...DEFAULT_PET
+    };
 
     // Animation frame rate
     const FRAME_RATE = 500; // milliseconds
@@ -73,6 +81,22 @@ document.addEventListener('DOMContentLoaded', () => {
     cleanBtn.addEventListener('click', cleanPet);
     renameBtn.addEventListener('click', renamePet);
     resetBtn.addEventListener('click', resetPet);
+
+    // Set up mouse tracking in the pet container
+    const petContainer = document.querySelector('.pet-container');
+    petContainer.addEventListener('mousemove', handleMouseMove);
+    petContainer.addEventListener('mouseenter', handleMouseEnter);
+    petContainer.addEventListener('mouseleave', handleMouseLeave);
+    petContainer.addEventListener('click', handleMouseClick);
+
+    // Mouse movement tracker
+    let mousePosition = {
+        x: 0,
+        y: 0
+    };
+    let isMouseInContainer = false;
+    let mouseFollowTimeout = null;
+    let mousePlayTimeout = null;
 
     // Animation function
     function startAnimation() {
@@ -116,10 +140,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // Idle animations - random behaviors when idle
         if (pet.state === STATES.IDLE && Math.random() < 0.2) {
             const randomBehaviors = [
-                () => { petDisplay.style.transform = 'rotate(5deg)'; },
-                () => { petDisplay.style.transform = 'rotate(-5deg)'; },
-                () => { petDisplay.style.transform = 'translateY(-5px)'; },
-                () => { petDisplay.style.transform = 'scale(1.05)'; }
+                () => {
+                    petDisplay.style.transform = 'rotate(5deg)';
+                },
+                () => {
+                    petDisplay.style.transform = 'rotate(-5deg)';
+                },
+                () => {
+                    petDisplay.style.transform = 'translateY(-5px)';
+                },
+                () => {
+                    petDisplay.style.transform = 'scale(1.05)';
+                }
             ];
 
             const randomBehavior = randomBehaviors[Math.floor(Math.random() * randomBehaviors.length)];
@@ -219,10 +251,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Add petting animation effects
         const petAnimation = [
-            () => { petDisplay.style.transform = 'translateY(-3px)'; },
-            () => { petDisplay.style.transform = 'none'; },
-            () => { petDisplay.style.transform = 'translateY(-2px)'; },
-            () => { petDisplay.style.transform = 'none'; }
+            () => {
+                petDisplay.style.transform = 'translateY(-3px)';
+            },
+            () => {
+                petDisplay.style.transform = 'none';
+            },
+            () => {
+                petDisplay.style.transform = 'translateY(-2px)';
+            },
+            () => {
+                petDisplay.style.transform = 'none';
+            }
         ];
 
         let petFrame = 0;
@@ -328,10 +368,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Add cleaning animation effects
         const shakeAnimation = [
-            () => { petDisplay.style.transform = 'translateX(-5px)'; },
-            () => { petDisplay.style.transform = 'translateX(5px)'; },
-            () => { petDisplay.style.transform = 'translateX(-3px)'; },
-            () => { petDisplay.style.transform = 'translateX(3px)'; },
+            () => {
+                petDisplay.style.transform = 'translateX(-5px)';
+            },
+            () => {
+                petDisplay.style.transform = 'translateX(5px)';
+            },
+            () => {
+                petDisplay.style.transform = 'translateX(-3px)';
+            },
+            () => {
+                petDisplay.style.transform = 'translateX(3px)';
+            },
         ];
 
         let shakeFrame = 0;
@@ -376,11 +424,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Add a slight bounce effect
             const bounceAnimation = [
-                () => { petDisplay.style.transform = 'translateY(0)'; },
-                () => { petDisplay.style.transform = 'translateY(-5px)'; },
-                () => { petDisplay.style.transform = 'translateY(0)'; },
-                () => { petDisplay.style.transform = 'translateY(-3px)'; },
-                () => { petDisplay.style.transform = 'translateY(0)'; }
+                () => {
+                    petDisplay.style.transform = 'translateY(0)';
+                },
+                () => {
+                    petDisplay.style.transform = 'translateY(-5px)';
+                },
+                () => {
+                    petDisplay.style.transform = 'translateY(0)';
+                },
+                () => {
+                    petDisplay.style.transform = 'translateY(-3px)';
+                },
+                () => {
+                    petDisplay.style.transform = 'translateY(0)';
+                }
             ];
 
             let bounceFrame = 0;
@@ -409,7 +467,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Reset the pet
     function resetPet() {
         if (confirm('Are you sure you want to reset your pet? All progress will be lost!')) {
-            pet = { ...DEFAULT_PET };
+            pet = {
+                ...DEFAULT_PET
+            };
             updateDisplay();
             updateStats();
             savePet();
@@ -506,5 +566,193 @@ document.addEventListener('DOMContentLoaded', () => {
             return JSON.parse(savedPet);
         }
         return null;
+    }
+
+    // Handle mouse movement within the pet container
+    function handleMouseMove(event) {
+        // Get relative position inside container
+        const rect = petContainer.getBoundingClientRect();
+        mousePosition.x = event.clientX - rect.left;
+        mousePosition.y = event.clientY - rect.top;
+
+        // Make pet look at the mouse if not in an active state
+        if (!isInActiveState() && isMouseInContainer) {
+            lookAtMouse();
+        }
+    }
+
+    // Handle mouse entering the container
+    function handleMouseEnter(event) {
+        isMouseInContainer = true;
+
+        // Don't interrupt if pet is in an active state
+        if (isInActiveState()) return;
+
+        // Random chance to notice the mouse
+        if (Math.random() < 0.7) {
+            pet.state = STATES.SURPRISED;
+            pet.currentFrame = 0;
+            updateDisplay();
+            showMessage(`${pet.name} noticed you!`);
+
+            // After being surprised, start following the mouse
+            mouseFollowTimeout = setTimeout(() => {
+                if (isMouseInContainer && !isInActiveState()) {
+                    pet.state = STATES.FOLLOWING_MOUSE;
+                    pet.currentFrame = 0;
+                    updateDisplay();
+                    showMessage(`${pet.name} is curious about your cursor!`);
+                }
+            }, 1000);
+        }
+    }
+
+    // Handle mouse leaving the container
+    function handleMouseLeave() {
+        isMouseInContainer = false;
+
+        // Clear any mouse-related timeouts
+        if (mouseFollowTimeout) {
+            clearTimeout(mouseFollowTimeout);
+            mouseFollowTimeout = null;
+        }
+
+        if (mousePlayTimeout) {
+            clearTimeout(mousePlayTimeout);
+            mousePlayTimeout = null;
+        }
+
+        // Return to idle state if currently following or playing with mouse
+        if (pet.state === STATES.FOLLOWING_MOUSE || pet.state === STATES.PLAYING_WITH_MOUSE) {
+            pet.state = STATES.IDLE;
+            pet.currentFrame = 0;
+            updatePetState();
+            updateDisplay();
+            savePet();
+        }
+    }
+
+    // Handle mouse clicks on the pet
+    function handleMouseClick(event) {
+        // Check if click is on or near the pet
+        const petRect = petDisplay.getBoundingClientRect();
+        const clickX = event.clientX;
+        const clickY = event.clientY;
+
+        // Expand the pet's hitbox slightly for easier clicking
+        const expandedRect = {
+            left: petRect.left - 20,
+            right: petRect.right + 20,
+            top: petRect.top - 20,
+            bottom: petRect.bottom + 20
+        };
+
+        if (
+            clickX >= expandedRect.left &&
+            clickX <= expandedRect.right &&
+            clickY >= expandedRect.top &&
+            clickY <= expandedRect.bottom
+        ) {
+            // If not in an active state, play with the mouse
+            if (!isInActiveState() || pet.state === STATES.FOLLOWING_MOUSE) {
+                playWithMouse();
+            }
+        }
+    }
+
+    // Make the pet look at the mouse
+    function lookAtMouse() {
+        // Only follow if in following state or with random chance when idle
+        if (pet.state !== STATES.FOLLOWING_MOUSE && Math.random() > 0.1) return;
+
+        // Calculate target position (with a slight lag for more natural movement)
+        const targetX = Math.min(
+            Math.max(0, mousePosition.x - 50),
+            petContainer.clientWidth - 100
+        );
+
+        // Move the pet toward the mouse
+        const moveStep = 3;
+        const distanceX = targetX - pet.position.x;
+
+        if (Math.abs(distanceX) > 5) {
+            // Determine direction and move
+            const direction = distanceX > 0 ? 1 : -1;
+            pet.position.x += moveStep * direction;
+
+            // Update position with smooth transition
+            petDisplay.style.transition = 'left 0.3s ease-out';
+            petDisplay.style.left = `${pet.position.x}px`;
+
+            // Add a slight bounce for movement
+            if (Math.random() < 0.2) {
+                petDisplay.style.transform = 'translateY(-2px)';
+                setTimeout(() => {
+                    petDisplay.style.transform = 'none';
+                }, 200);
+            }
+        }
+    }
+
+    // Play with the mouse cursor
+    function playWithMouse() {
+        // Don't play if already in an active state (except following)
+        if (isInActiveState() && pet.state !== STATES.FOLLOWING_MOUSE) return;
+
+        pet.state = STATES.PLAYING_WITH_MOUSE;
+        pet.currentFrame = 0;
+        updateDisplay();
+        showMessage(`${pet.name} is playing with your cursor!`);
+
+        // Add playful animation effects
+        const playAnimation = [
+            () => {
+                petDisplay.style.transform = 'translateY(-5px) rotate(5deg)';
+            },
+            () => {
+                petDisplay.style.transform = 'translateY(-3px) rotate(-5deg)';
+            },
+            () => {
+                petDisplay.style.transform = 'translateY(-4px) scale(1.05)';
+            },
+            () => {
+                petDisplay.style.transform = 'none';
+            }
+        ];
+
+        let playFrame = 0;
+        const playInterval = setInterval(() => {
+            playAnimation[playFrame]();
+            playFrame = (playFrame + 1) % playAnimation.length;
+        }, 200);
+
+        increaseStat('happiness', 10);
+        decreaseStat('energy', 5);
+
+        setTimeout(() => {
+            clearInterval(playInterval);
+            petDisplay.style.transform = 'none';
+
+            // Return to following or idle
+            pet.state = isMouseInContainer ? STATES.FOLLOWING_MOUSE : STATES.IDLE;
+            pet.currentFrame = 0;
+            updatePetState();
+            updateDisplay();
+            updateStats();
+            savePet();
+        }, 3000);
+    }
+
+    // Helper function to check if pet is in an active state that shouldn't be interrupted
+    function isInActiveState() {
+        const activeStates = [
+            STATES.EATING,
+            STATES.PLAYING,
+            STATES.SLEEPING,
+            STATES.CLEANING,
+            STATES.PLAYING_WITH_MOUSE
+        ];
+
+        return activeStates.includes(pet.state);
     }
 });
