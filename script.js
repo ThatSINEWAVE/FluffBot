@@ -1,4 +1,3 @@
-// script.js
 document.addEventListener('DOMContentLoaded', () => {
     // DOM elements
     const petDisplay = document.getElementById('pet-display');
@@ -31,67 +30,679 @@ document.addEventListener('DOMContentLoaded', () => {
         CLEANING: 'cleaning'
     };
 
-    // ASCII art for different states
+    // Enhanced ASCII art for different states with animation frames
     const ASCII_ART = {
         [STATES.IDLE]: [
-            '  /\\_/\\  ',
-            ' ( o.o ) ',
-            ' > ^ <   ',
-            '         '
+            // Frame 1
+            [
+                '    /\\_/\\    ',
+                '   ( o.o )   ',
+                '   > ^ <     ',
+                '  /    \\     ',
+                '              ',
+                '    meow~     '
+            ],
+            // Frame 2
+            [
+                '    /\\_/\\    ',
+                '   ( o.o )   ',
+                '   > ~ <     ',
+                '  /    \\     ',
+                '              ',
+                '    mew~      '
+            ],
+            // Frame 3
+            [
+                '    /\\_/\\    ',
+                '   ( o.- )   ',
+                '   > ^ <     ',
+                '  /    \\     ',
+                '      z      ',
+                '              '
+            ],
+            // Frame 4
+            [
+                '    /\\_/\\    ',
+                '   ( -.o )   ',
+                '   > ^ <     ',
+                '  /    \\     ',
+                '     z       ',
+                '              '
+            ],
+            // Frame 5
+            [
+                '    /\\_/\\    ',
+                '   ( o.o )   ',
+                '   > ^ <     ',
+                '  /    \\~    ',
+                '              ',
+                '              '
+            ],
+            // Frame 6
+            [
+                '    /\\_/\\    ',
+                '   ( o.o )   ',
+                '   > ^ <     ',
+                '  ~\\    \\    ',
+                '              ',
+                '              '
+            ]
         ],
         [STATES.EATING]: [
-            '  /\\_/\\  ',
-            ' ( o.o ) ',
-            ' > ^ < 🍔 ',
-            '  nomnom  '
+            // Frame 1
+            [
+                '    /\\_/\\     ',
+                '   ( o.o )    ',
+                '   > ^ <  🍔  ',
+                '  /    \\      ',
+                '               ',
+                '   *sniff*     '
+            ],
+            // Frame 2
+            [
+                '    /\\_/\\     ',
+                '   ( o.o )    ',
+                '   > O <      ',
+                '  /    \\      ',
+                '     nom      ',
+                '               '
+            ],
+            // Frame 3
+            [
+                '    /\\_/\\     ',
+                '   ( o.o )    ',
+                '   > ~ <   🍔 ',
+                '  /    \\      ',
+                '    nomnom    ',
+                '               '
+            ],
+            // Frame 4
+            [
+                '    /\\_/\\     ',
+                '   ( ^.^ )    ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                '   *chomp*    ',
+                '     nom!     '
+            ],
+            // Frame 5
+            [
+                '    /\\_/\\     ',
+                '   ( o.o )    ',
+                '   > O <  🍔  ',
+                '  /    \\      ',
+                '   *munch*    ',
+                '               '
+            ],
+            // Frame 6
+            [
+                '    /\\_/\\     ',
+                '   ( ^.^ )    ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                '     yum      ',
+                '    *burp*    '
+            ]
         ],
         [STATES.PLAYING]: [
-            '  /\\_/\\  ',
-            ' ( ^.^ ) ',
-            '   \\ /   ',
-            '  bouncing!'
+            // Frame 1
+            [
+                '    /\\_/\\     ',
+                '   ( ^.^ )    ',
+                '     \\ /      ',
+                '    / \\       ',
+                '    \\o/       ',
+                '    wheee!    '
+            ],
+            // Frame 2
+            [
+                '      /\\_/\\   ',
+                '     ( ^.^ )  ',
+                '       \\ /    ',
+                '      / \\     ',
+                '      ~🧶~    ',
+                '    bounce!   '
+            ],
+            // Frame 3
+            [
+                '  \\/\\_/\\      ',
+                ' ( ^.^ )      ',
+                '   \\ /        ',
+                '  / \\         ',
+                '    🧶~       ',
+                '    zoom!     '
+            ],
+            // Frame 4
+            [
+                '    /\\_/\\     ',
+                '   ( ^.^ )    ',
+                '     / \\      ',
+                '    /   \\     ',
+                '  🧶          ',
+                '    yippee!   '
+            ],
+            // Frame 5
+            [
+                '   /\\_/\\      ',
+                '  ( ^o^ )     ',
+                '    \\ /       ',
+                '    / \\       ',
+                '       🧶     ',
+                '    woohoo!   '
+            ],
+            // Frame 6
+            [
+                '     /\\_/\\    ',
+                '    ( ^.^ )   ',
+                '      | |     ',
+                '     /   \\    ',
+                '    🧶         ',
+                '   *pounce*   '
+            ]
         ],
         [STATES.SLEEPING]: [
-            '  /\\_/\\  ',
-            ' ( -.- ) ',
-            ' > z z < ',
-            '         '
+            // Frame 1
+            [
+                '    /\\_/\\     ',
+                '   ( -.- )    ',
+                '   > z z <    ',
+                '  U     U     ',
+                '    ZzzZz     ',
+                '               '
+            ],
+            // Frame 2
+            [
+                '    /\\_/\\     ',
+                '   ( -.- )    ',
+                '   > Z z <    ',
+                '  U     U     ',
+                '     zZz      ',
+                '               '
+            ],
+            // Frame 3
+            [
+                '    /\\_/\\     ',
+                '   ( -.- )    ',
+                '   > z Z <    ',
+                '  U     U     ',
+                '    Zzzz      ',
+                '               '
+            ],
+            // Frame 4
+            [
+                '    /\\_/\\     ',
+                '   ( -.- )    ',
+                '   > Z Z <    ',
+                '  U     U     ',
+                '     zZzZ     ',
+                '               '
+            ],
+            // Frame 5
+            [
+                '    /\\_/\\     ',
+                '   ( -.- )    ',
+                '   > z z <    ',
+                '  U     U     ',
+                '    *dream*   ',
+                '     ZzZ      '
+            ],
+            // Frame 6
+            [
+                '    /\\_/\\     ',
+                '   ( -.- )    ',
+                '   > Z Z <    ',
+                '  U     U     ',
+                '   *snooze*   ',
+                '     Zzz      '
+            ]
         ],
         [STATES.HAPPY]: [
-            '  /\\_/\\  ',
-            ' ( ^.^ ) ',
-            ' > ^ <   ',
-            '  purr~  '
+            // Frame 1
+            [
+                '    /\\_/\\     ',
+                '   ( ^.^ )    ',
+                '   > ^ <      ',
+                '  /    \\      ',
+                '   *purr*     ',
+                '    meow~     '
+            ],
+            // Frame 2
+            [
+                '    /\\_/\\     ',
+                '   ( ^.^ )    ',
+                '    \\^/       ',
+                '   /  \\       ',
+                '  *purr~*     ',
+                '    happy     '
+            ],
+            // Frame 3
+            [
+                '    /\\_/\\     ',
+                '   ( ^.^ )    ',
+                '      \\^/     ',
+                '     /  \\     ',
+                '   *purr~*    ',
+                '  *wiggle*    '
+            ],
+            // Frame 4
+            [
+                '    /\\_/\\     ',
+                '   ( ^o^ )    ',
+                '   > ^ <      ',
+                '  /    \\      ',
+                '  *purrr~*    ',
+                '   *nuzzle*   '
+            ],
+            // Frame 5
+            [
+                '    /\\_/\\     ',
+                '   ( ^.^ )    ',
+                '   > ^ <      ',
+                ' /      \\     ',
+                ' \\_/\\_/\\_/    ',
+                '   *purr*     '
+            ],
+            // Frame 6
+            [
+                '    /\\_/\\     ',
+                '   ( ^.^ )    ',
+                '   > ^ <      ',
+                '  /    \\~     ',
+                ' *purrrr*     ',
+                '  *twitch*    '
+            ]
         ],
         [STATES.HUNGRY]: [
-            '  /\\_/\\  ',
-            ' ( o.O ) ',
-            ' > ~ <   ',
-            ' *growl*  '
+            // Frame 1
+            [
+                '    /\\_/\\     ',
+                '   ( o.O )    ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                '  *growl*     ',
+                '    food?     '
+            ],
+            // Frame 2
+            [
+                '    /\\_/\\     ',
+                '   ( O.o )    ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                ' *rumble*     ',
+                '   hungry     '
+            ],
+            // Frame 3
+            [
+                '    /\\_/\\     ',
+                '   ( o.O )    ',
+                '   > o <      ',
+                '  /    \\      ',
+                ' *stomach*    ',
+                '  *growls*    '
+            ],
+            // Frame 4
+            [
+                '    /\\_/\\     ',
+                '   ( -.- )    ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                '   *sigh*     ',
+                '   feed me    '
+            ],
+            // Frame 5
+            [
+                '    /\\_/\\     ',
+                '   ( >.< )     ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                ' *staaaare*   ',
+                '   MEOW!      '
+            ],
+            // Frame 6
+            [
+                '    /\\_/\\     ',
+                '   ( u.u )    ',
+                '   > . <      ',
+                '  /    \\      ',
+                '   *pout*     ',
+                '  so hungry   '
+            ]
         ],
         [STATES.TIRED]: [
-            '  /\\_/\\  ',
-            ' ( o.o ) ',
-            ' > - <   ',
-            ' *yawn*  '
+            // Frame 1
+            [
+                '    /\\_/\\     ',
+                '   ( o.o )    ',
+                '   > - <      ',
+                '  /    \\      ',
+                '   *yawn*     ',
+                '              '
+            ],
+            // Frame 2
+            [
+                '    /\\_/\\     ',
+                '   ( o.o )    ',
+                '   > O <      ',
+                '  /    \\      ',
+                '   *YAWN*     ',
+                '   sleepy     '
+            ],
+            // Frame 3
+            [
+                '    /\\_/\\     ',
+                '   ( -.o )    ',
+                '   > - <      ',
+                '  /    \\      ',
+                '   *tired*    ',
+                '     zzz      '
+            ],
+            // Frame 4
+            [
+                '    /\\_/\\     ',
+                '   ( o.- )    ',
+                '   > - <      ',
+                '  /    \\      ',
+                '   *sleepy*   ',
+                '    *yawn*    '
+            ],
+            // Frame 5
+            [
+                '    /\\_/\\     ',
+                '   ( o.o )    ',
+                '   > - <      ',
+                '  /    \\      ',
+                '   *blink*    ',
+                '     zzz      '
+            ],
+            // Frame 6
+            [
+                '    /\\_/\\     ',
+                '   ( -.- )    ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                '  *droopy*    ',
+                '   *yawn*     '
+            ]
         ],
         [STATES.BORED]: [
-            '  /\\_/\\  ',
-            ' ( u.u ) ',
-            ' > . <   ',
-            '  sigh   '
+            // Frame 1
+            [
+                '    /\\_/\\     ',
+                '   ( u.u )    ',
+                '   > . <      ',
+                '  /    \\      ',
+                '    *sigh*    ',
+                '   anything?  '
+            ],
+            // Frame 2
+            [
+                '    /\\_/\\     ',
+                '   ( u.u )    ',
+                '   > , <      ',
+                '  /    \\      ',
+                '    bored     ',
+                '   *fidget*   '
+            ],
+            // Frame 3
+            [
+                '    /\\_/\\     ',
+                '   ( -.- )    ',
+                '   > . <      ',
+                '  /    \\      ',
+                '    *hmph*    ',
+                '  so boring   '
+            ],
+            // Frame 4
+            [
+                '    /\\_/\\     ',
+                '   ( u.u )    ',
+                '   > . <      ',
+                '  /    \\      ',
+                '    *yawn*    ',
+                '   booored    '
+            ],
+            // Frame 5
+            [
+                '    /\\_/\\     ',
+                '   ( -_- )    ',
+                '   > , <      ',
+                '  /    \\      ',
+                '  *stretch*   ',
+                '   nothing    '
+            ],
+            // Frame 6
+            [
+                '    /\\_/\\     ',
+                '   ( u_u )    ',
+                '   > . <      ',
+                '  /    \\      ',
+                '   *paws*     ',
+                '    dull      '
+            ]
         ],
         [STATES.DIRTY]: [
-            '  /\\_/\\  ',
-            ' ( >_< ) ',
-            ' > ~ <   ',
-            '  *ick*  '
+            // Frame 1
+            [
+                '    /\\_/\\     ',
+                '   ( >_< )    ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                '    *ick*     ',
+                '   ewwww      '
+            ],
+            // Frame 2
+            [
+                '    /\\_/\\     ',
+                '   ( >_< )    ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                '    *ew*      ',
+                '   *shake*    '
+            ],
+            // Frame 3
+            [
+                '    /\\_/\\     ',
+                '   ( x_x )    ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                '    *dirt*    ',
+                '   *sneeze*   '
+            ],
+            // Frame 4
+            [
+                '    /\\_/\\     ',
+                '   ( >_< )    ',
+                '   > * <      ',
+                '  /    \\      ',
+                '   *cough*    ',
+                '   *achoo*    '
+            ],
+            // Frame 5
+            [
+                '    /\\_/\\     ',
+                '   ( T_T )    ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                '    *mud*     ',
+                '   *shiver*   '
+            ],
+            // Frame 6
+            [
+                '    /\\_/\\     ',
+                '   ( >_< )    ',
+                '   > * <      ',
+                '  /    \\      ',
+                '    *gross*   ',
+                '    *pout*    '
+            ]
         ],
         [STATES.CLEANING]: [
-            '  /\\_/\\  ',
-            ' ( o.o ) ',
-            ' > ~ <   ',
-            ' *splash*'
+            // Frame 1
+            [
+                '    /\\_/\\     ',
+                '   ( o.o )    ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                '   *splash*   ',
+                '     ~~~      '
+            ],
+            // Frame 2
+            [
+                '    /\\_/\\     ',
+                '   ( o.o )~   ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                '   *scrub*    ',
+                '    ~~~~~     '
+            ],
+            // Frame 3
+            [
+                '    /\\_/\\     ',
+                '  ~( o.o )    ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                '   *rinse*    ',
+                '     ~~~~     '
+            ],
+            // Frame 4
+            [
+                '    /\\_/\\     ',
+                '   ( ^.^ )    ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                '   *clean!*   ',
+                '    *dry*     '
+            ],
+            // Frame 5
+            [
+                '    /\\_/\\     ',
+                '   ( o.o )~~~',
+                '   > ~ <      ',
+                '  /    \\      ',
+                '   *bubbles*  ',
+                '     ~~~      '
+            ],
+            // Frame 6
+            [
+                '    /\\_/\\     ',
+                '   ( ^.^ )    ',
+                '   > ~ <      ',
+                '  /    \\      ',
+                '   *groom*    ',
+                '    *shine*   '
+            ]
+        ],
+        [STATES.PLAYFUL]: [
+            // Frame 1
+            [
+                '    /\\_/\\     ',
+                '   ( o.o )    ',
+                '   > ^ <      ',
+                '  /    \\~     ',
+                '    *tail*    ',
+                '   *wiggle*   '
+            ],
+            // Frame 2
+            [
+                '    ^/\\_/\\    ',
+                '   (  o.o )   ',
+                '    > ^ <     ',
+                '   /    \\     ',
+                '   *alert*    ',
+                '   *ready*    '
+            ],
+            // Frame 3
+            [
+                '    /\\_/\\|    ',
+                '   ( ^.^ )    ',
+                '    > o <     ',
+                '  _/    \\     ',
+                '   *paws*     ',
+                '   *swipe*    '
+            ],
+            // Frame 4
+            [
+                '   |/\\_/\\     ',
+                '   ( ^.^ )    ',
+                '   > o <      ',
+                '   /    \\_    ',
+                '  *stalking*  ',
+                '  *crouched*  '
+            ],
+            // Frame 5
+            [
+                '    /\\_/\\     ',
+                '   ( ^o^ )    ',
+                '   > w <      ',
+                '  /    \\      ',
+                '  *excited*   ',
+                ' *tail wag*   '
+            ],
+            // Frame 6
+            [
+                '      /\\_/\\   ',
+                '     ( >w< )  ',
+                '     > ^ <    ',
+                '    /    \\    ',
+                '  *pouncing*  ',
+                '  *attacking* '
+            ]
+        ],
+        [STATES.RELAXED]: [
+            // Frame 1
+            [
+                '   __/\\_/\\__  ',
+                '  (  o.o  )   ',
+                '   > ~ <      ',
+                '    U   U     ',
+                '   *lounge*   ',
+                '  *relaxed*   '
+            ],
+            // Frame 2
+            [
+                '   __/\\_/\\__  ',
+                '  (  ^.^  )   ',
+                '   > ~ <      ',
+                '    U   U     ',
+                '   *comfy*    ',
+                '   *sunny*    '
+            ],
+            // Frame 3
+            [
+                '   __/\\_/\\__  ',
+                '  (  u.u  )   ',
+                '   > ~ <      ',
+                '    U   U     ',
+                '   *sunspot*  ',
+                '   *warm*     '
+            ],
+            // Frame 4
+            [
+                '   __/\\_/\\__  ',
+                '  (  -.-  )   ',
+                '   > ~ <      ',
+                '    U   U     ',
+                '   *cozy*     ',
+                '   *comfy*    '
+            ],
+            // Frame 5
+            [
+                '   __/\\_/\\__  ',
+                '  (  ^.^  )   ',
+                '   > ~ <      ',
+                '    U   U     ',
+                '   *basking*  ',
+                '   *bliss*    '
+            ],
+            // Frame 6
+            [
+                '   __/\\_/\\__  ',
+                '  (  o.o  )   ',
+                '   > ~ <      ',
+                '    U   U     ',
+                '   *dozing*   ',
+                '   *chill*    '
+            ]
         ]
     };
 
@@ -105,16 +716,22 @@ document.addEventListener('DOMContentLoaded', () => {
         state: STATES.IDLE,
         age: 0,
         lastSaved: Date.now(),
-        position: { x: 0, y: 0 }
+        position: { x: 0, y: 0 },
+        currentFrame: 0
     };
 
     // Current pet data
     let pet = loadPet() || { ...DEFAULT_PET };
 
+    // Animation frame rate
+    const FRAME_RATE = 500; // milliseconds
+    let animationInterval;
+
     // Initialize the display
     updateDisplay();
     updateStats();
     showMessage(`Welcome back to ${pet.name}!`);
+    startAnimation();
 
     // Start the game loop
     setInterval(gameLoop, 5000);
@@ -127,6 +744,19 @@ document.addEventListener('DOMContentLoaded', () => {
     cleanBtn.addEventListener('click', cleanPet);
     renameBtn.addEventListener('click', renamePet);
     resetBtn.addEventListener('click', resetPet);
+
+    // Animation function
+    function startAnimation() {
+        if (animationInterval) {
+            clearInterval(animationInterval);
+        }
+
+        animationInterval = setInterval(() => {
+            // Cycle through animation frames
+            pet.currentFrame = (pet.currentFrame + 1) % ASCII_ART[pet.state].length;
+            updateDisplay();
+        }, FRAME_RATE);
+    }
 
     // Game loop for automatic changes
     function gameLoop() {
@@ -154,8 +784,24 @@ document.addEventListener('DOMContentLoaded', () => {
             movePet();
         }
 
+        // Idle animations - random behaviors when idle
+        if (pet.state === STATES.IDLE && Math.random() < 0.2) {
+            const randomBehaviors = [
+                () => { petDisplay.style.transform = 'rotate(5deg)'; },
+                () => { petDisplay.style.transform = 'rotate(-5deg)'; },
+                () => { petDisplay.style.transform = 'translateY(-5px)'; },
+                () => { petDisplay.style.transform = 'scale(1.05)'; }
+            ];
+
+            const randomBehavior = randomBehaviors[Math.floor(Math.random() * randomBehaviors.length)];
+            randomBehavior();
+
+            setTimeout(() => {
+                petDisplay.style.transform = 'none';
+            }, 1000);
+        }
+
         // Update display and save
-        updateDisplay();
         updateStats();
         savePet();
     }
@@ -172,6 +818,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update the pet's state based on stats
     function updatePetState() {
+        const previousState = pet.state;
+
         if (pet.state === STATES.EATING || pet.state === STATES.PLAYING ||
             pet.state === STATES.SLEEPING || pet.state === STATES.CLEANING) {
             return; // Don't interrupt activities
@@ -194,6 +842,12 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             pet.state = STATES.IDLE;
         }
+
+        // If state changed, reset the animation frame
+        if (previousState !== pet.state) {
+            pet.currentFrame = 0;
+            updateDisplay();
+        }
     }
 
     // Feed the pet
@@ -204,14 +858,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         pet.state = STATES.EATING;
+        pet.currentFrame = 0;
         updateDisplay();
         showMessage(`You feed ${pet.name}. Yum!`);
+
+        // Add feeding animation effects
+        petDisplay.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+            petDisplay.style.transform = 'none';
+        }, 300);
 
         increaseStat('hunger', 30);
         decreaseStat('cleanliness', 10);
 
         setTimeout(() => {
             pet.state = STATES.IDLE;
+            pet.currentFrame = 0;
             updatePetState();
             updateDisplay();
             updateStats();
@@ -222,13 +884,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // Pet the pet
     function petPet() {
         pet.state = STATES.HAPPY;
+        pet.currentFrame = 0;
         updateDisplay();
         showMessage(`You pet ${pet.name}. Purr~!`);
+
+        // Add petting animation effects
+        const petAnimation = [
+            () => { petDisplay.style.transform = 'translateY(-3px)'; },
+            () => { petDisplay.style.transform = 'none'; },
+            () => { petDisplay.style.transform = 'translateY(-2px)'; },
+            () => { petDisplay.style.transform = 'none'; }
+        ];
+
+        let petFrame = 0;
+        const petInterval = setInterval(() => {
+            petAnimation[petFrame]();
+            petFrame = (petFrame + 1) % petAnimation.length;
+        }, 200);
+
+        setTimeout(() => {
+            clearInterval(petInterval);
+            petDisplay.style.transform = 'none';
+        }, 2000);
 
         increaseStat('happiness', 15);
 
         setTimeout(() => {
             pet.state = STATES.IDLE;
+            pet.currentFrame = 0;
             updatePetState();
             updateDisplay();
             updateStats();
@@ -244,9 +927,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         pet.state = STATES.PLAYING;
-        petDisplay.classList.add('moving');
+        pet.currentFrame = 0;
         updateDisplay();
         showMessage(`You play with ${pet.name}. So fun!`);
+
+        // Add bouncing animation
+        petDisplay.classList.add('bouncing');
 
         increaseStat('happiness', 25);
         decreaseStat('energy', 20);
@@ -254,7 +940,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             pet.state = STATES.IDLE;
-            petDisplay.classList.remove('moving');
+            pet.currentFrame = 0;
+            petDisplay.classList.remove('bouncing');
             updatePetState();
             updateDisplay();
             updateStats();
@@ -270,8 +957,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         pet.state = STATES.SLEEPING;
+        pet.currentFrame = 0;
         updateDisplay();
         showMessage(`${pet.name} is sleeping. Zzz...`);
+
+        // Add sleepy animation effect - slow down the frame rate
+        if (animationInterval) {
+            clearInterval(animationInterval);
+        }
+
+        animationInterval = setInterval(() => {
+            pet.currentFrame = (pet.currentFrame + 1) % ASCII_ART[pet.state].length;
+            updateDisplay();
+        }, FRAME_RATE * 2); // Slower animation when sleeping
 
         // Disable buttons while sleeping
         disableButtons(true);
@@ -281,6 +979,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             increaseStat('energy', 50);
             pet.state = STATES.IDLE;
+            pet.currentFrame = 0;
+            startAnimation(); // Reset to normal animation speed
             updatePetState();
             updateDisplay();
             updateStats();
@@ -293,14 +993,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // Clean the pet
     function cleanPet() {
         pet.state = STATES.CLEANING;
+        pet.currentFrame = 0;
         updateDisplay();
         showMessage(`You clean ${pet.name}. Splash!`);
+
+        // Add cleaning animation effects
+        const shakeAnimation = [
+            () => { petDisplay.style.transform = 'translateX(-5px)'; },
+            () => { petDisplay.style.transform = 'translateX(5px)'; },
+            () => { petDisplay.style.transform = 'translateX(-3px)'; },
+            () => { petDisplay.style.transform = 'translateX(3px)'; },
+        ];
+
+        let shakeFrame = 0;
+        const shakeInterval = setInterval(() => {
+            shakeAnimation[shakeFrame]();
+            shakeFrame = (shakeFrame + 1) % shakeAnimation.length;
+        }, 150);
+
+        setTimeout(() => {
+            clearInterval(shakeInterval);
+            petDisplay.style.transform = 'none';
+        }, 3000);
 
         increaseStat('cleanliness', 100);
         decreaseStat('happiness', 10); // Most pets don't like baths!
 
         setTimeout(() => {
             pet.state = STATES.IDLE;
+            pet.currentFrame = 0;
             updatePetState();
             updateDisplay();
             updateStats();
@@ -314,15 +1035,34 @@ document.addEventListener('DOMContentLoaded', () => {
         if (pet.state === STATES.IDLE || pet.state === STATES.HAPPY ||
             pet.state === STATES.HUNGRY || pet.state === STATES.BORED) {
 
-            pet.position.x = Math.floor(Math.random() * (petDisplay.parentElement.clientWidth - 100));
-            petDisplay.style.left = `${pet.position.x}px`;
+            // Set a random position within the container
+            const availableWidth = petDisplay.parentElement.clientWidth - 100;
+            const randomDirection = Math.random() > 0.5 ? 1 : -1;
+            const targetX = Math.min(Math.max(0, pet.position.x + (randomDirection * (Math.floor(Math.random() * 150) + 50))), availableWidth);
 
-            // Temporarily add movement class
-            petDisplay.classList.add('moving');
+            // Smooth transition using CSS
+            petDisplay.style.transition = 'left 2s ease-in-out';
+            pet.position.x = targetX;
+            petDisplay.style.left = `${targetX}px`;
 
-            setTimeout(() => {
-                petDisplay.classList.remove('moving');
-            }, 10000);
+            // Add a slight bounce effect
+            const bounceAnimation = [
+                () => { petDisplay.style.transform = 'translateY(0)'; },
+                () => { petDisplay.style.transform = 'translateY(-5px)'; },
+                () => { petDisplay.style.transform = 'translateY(0)'; },
+                () => { petDisplay.style.transform = 'translateY(-3px)'; },
+                () => { petDisplay.style.transform = 'translateY(0)'; }
+            ];
+
+            let bounceFrame = 0;
+            const bounceInterval = setInterval(() => {
+                if (bounceFrame < bounceAnimation.length) {
+                    bounceAnimation[bounceFrame]();
+                    bounceFrame++;
+                } else {
+                    clearInterval(bounceInterval);
+                }
+            }, 200);
         }
     }
 
@@ -350,31 +1090,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update the visual display of the pet
     function updateDisplay() {
-        const art = ASCII_ART[pet.state];
-        petDisplay.textContent = art.join('\n');
+        // Ensure that the pet's state exists in ASCII_ART
+        if (!ASCII_ART[pet.state]) {
+            console.error(`State '${pet.state}' does not exist in ASCII_ART`);
+            pet.state = STATES.IDLE; // Reset to idle state
+        }
+
+        // Get the current animation frame for the current state
+        const artFrames = ASCII_ART[pet.state];
+
+        // Ensure currentFrame index is valid
+        if (pet.currentFrame >= artFrames.length) {
+            pet.currentFrame = 0;
+        }
+
+        const currentFrame = artFrames[pet.currentFrame];
+
+        // Display the current frame (with a safety check)
+        if (currentFrame) {
+            petDisplay.textContent = currentFrame.join('\n');
+        } else {
+            console.error(`Frame ${pet.currentFrame} for state '${pet.state}' is undefined`);
+            petDisplay.textContent = ASCII_ART[STATES.IDLE][0].join('\n'); // Fallback to first idle frame
+        }
+
         petAge.textContent = pet.age;
         petName.textContent = pet.name;
     }
 
     // Update the stat bars
     function updateStats() {
+        // Add smooth transitions for stat bars
+        hungerBar.style.transition = 'width 0.5s ease-in-out';
+        happinessBar.style.transition = 'width 0.5s ease-in-out';
+        energyBar.style.transition = 'width 0.5s ease-in-out';
+
+        // Update widths
         hungerBar.style.width = `${pet.hunger}%`;
         happinessBar.style.width = `${pet.happiness}%`;
         energyBar.style.width = `${pet.energy}%`;
+
+        // Add color changing based on levels
+        if (pet.hunger < 30) hungerBar.style.backgroundColor = '#ff0000';
+        else hungerBar.style.backgroundColor = '#f44336';
+
+        if (pet.happiness < 30) happinessBar.style.backgroundColor = '#8bc34a';
+        else happinessBar.style.backgroundColor = '#4caf50';
+
+        if (pet.energy < 30) energyBar.style.backgroundColor = '#90caf9';
+        else energyBar.style.backgroundColor = '#2196f3';
     }
 
-    // Show a message in the message box
+    // Show a message in the message box with better animation
     function showMessage(message) {
-        messageBox.textContent = message;
-
-        // Fade out message after a delay
-        setTimeout(() => {
-            messageBox.style.opacity = '0.7';
-        }, 3000);
+        // Add fade out/in transition
+        messageBox.style.opacity = '0';
 
         setTimeout(() => {
+            messageBox.textContent = message;
             messageBox.style.opacity = '1';
-        }, 100);
+
+            // Fade out message after a delay
+            setTimeout(() => {
+                messageBox.style.opacity = '0.7';
+            }, 3000);
+        }, 300);
     }
 
     // Enable/disable buttons
