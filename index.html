@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FluffBot - Your ASCII Virtual Pet</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>FluffBot</h1>
+        <p>Your ASCII Virtual Pet</p>
+      </header>
+      <div class="stats-container">
+        <div class="stat">
+          <span>Hunger:</span>
+          <div class="progress-bar">
+            <div id="hunger-bar" class="progress"></div>
+          </div>
+        </div>
+        <div class="stat">
+          <span>Happiness:</span>
+          <div class="progress-bar">
+            <div id="happiness-bar" class="progress"></div>
+          </div>
+        </div>
+        <div class="stat">
+          <span>Energy:</span>
+          <div class="progress-bar">
+            <div id="energy-bar" class="progress"></div>
+          </div>
+        </div>
+      </div>
+      <div class="pet-container">
+        <div id="pet-display"></div>
+        <div id="message-box"></div>
+      </div>
+      <div class="controls">
+        <button id="feed-btn">Feed</button>
+        <button id="pet-btn">Pet</button>
+        <button id="play-btn">Play</button>
+        <button id="sleep-btn">Sleep</button>
+        <button id="clean-btn">Clean</button>
+      </div>
+      <div class="info">
+        <p>Name: <span id="pet-name">FluffBot</span>
+        </p>
+        <p>Age: <span id="pet-age">0</span> days </p>
+        <button id="rename-btn">Rename</button>
+        <button id="reset-btn">Reset Pet</button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
